@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/app-icon">
+        <file>48x48/textpad-editor.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>24x24/close.png</file>
+        <file>24x24/copy.png</file>
+        <file>24x24/cut.png</file>
+        <file>24x24/font.png</file>
+        <file>24x24/fullscreen.png</file>
+        <file>24x24/lock.png</file>
+        <file>24x24/new.png</file>
+        <file>24x24/open.png</file>
+        <file>24x24/paste.png</file>
+        <file>24x24/print.png</file>
+        <file>24x24/redo.png</file>
+        <file>24x24/save-as.png</file>
+        <file>24x24/save.png</file>
+        <file>24x24/search.png</file>
+        <file>24x24/select-all.png</file>
+        <file>24x24/undo.png</file>
+    </qresource>
+</RCC>

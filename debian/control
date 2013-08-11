@@ -1,0 +1,20 @@
+Source: textpad-editor
+Maintainer: Alex S (alex-97) <alex_sr97@outlook.com>
+Section: editors
+Priority: optional
+Build-Depends: debhelper (>= 8.0.0), locales
+Standards-Version: 3.9.4
+Homepage: http://textpad-editor.sf.net/
+
+Package: textpad-editor
+Architecture: any
+Section: editors
+Priority: optional
+Depends: libice6, libpcre3, libegl1-mesa, libxcb1, libxau6, libqt4-dev, libx11-6, locales, libxrender1, libc6-i386, libfreetype6, libffi6, libxcb1, libc6, libqt4-dev-bin, libfreetype6, libxext6, libfontconfig1, libaudio2, libglib2.0-0, libxext6, libexpat1, libffi6, libgl1-mesa-glx, libgl1-mesa-glx, libexpat1, libxi6, libsm6, libpng12-0, libxdmcp6, libxau6, libxt6, zlib1g, libxdmcp6, libx11-6, locales
+Description: Simple and lightweight text editor
+ Textpad Editor is a simple, general-purpose, cross-platform text editor written using the Qt toolkit. Textpad aims to be faster and more lightweight than most text editors, but as useful as them. 
+ Additionally, Textpad supports syntax highlighting, word count, line count and comes with 5 different color schemes.
+ This package contains the Textpad Editor.
+Homepage: http://textpad-editor.sourceforge.net/
+ 
+
