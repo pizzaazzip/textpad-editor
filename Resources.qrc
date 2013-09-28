@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Resources/Icons/16x16/Search.png</file>
+        <file>Resources/Icons/24x24/Close.png</file>
+        <file>Resources/Icons/24x24/Copy.png</file>
+        <file>Resources/Icons/24x24/Cut.png</file>
+        <file>Resources/Icons/24x24/Fullscreen.png</file>
+        <file>Resources/Icons/24x24/Lock.png</file>
+        <file>Resources/Icons/24x24/New.png</file>
+        <file>Resources/Icons/24x24/Open.png</file>
+        <file>Resources/Icons/24x24/Paste.png</file>
+        <file>Resources/Icons/24x24/Redo.png</file>
+        <file>Resources/Icons/24x24/Save As.png</file>
+        <file>Resources/Icons/24x24/Save.png</file>
+        <file>Resources/Icons/24x24/Search and Replace.png</file>
+        <file>Resources/Icons/24x24/Search.png</file>
+        <file>Resources/Icons/24x24/Select All.png</file>
+        <file>Resources/Icons/24x24/Undo.png</file>
+        <file>Resources/Icons/24x24/Quit.png</file>
+        <file>Resources/Icons/24x24/Print.png</file>
+        <file>Resources/Icons/48x48/TextpadEditor.png</file>
+        <file>Resources/Icons/96x96/TextpadEditor.png</file>
+    </qresource>
+    <qresource prefix="/HTML">
+        <file>Resources/HTML/en.html</file>
+    </qresource>
+</RCC>
