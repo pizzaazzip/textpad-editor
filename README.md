@@ -2,6 +2,7 @@ Textpad Editor
 ==============
 
 Simple and lightweight text editor 
+
 ---
 
 ### Installation Instructions (only if you got the binaries from Textpad's page)
