@@ -4,9 +4,6 @@
 #include "Code/TextEdit/CodeEditor/Highlighter.hh"
 
 void Highlighter::setLaTeX() {
-    // Booleans
-    BoolPatterns << "\\";
-
     // Keywords
     KeywordPatterns << "\\\\section"           << "\\\\item"              << "\\\\subsection" << "\\\\subsubsection"
                     << "\\\\chapter"           << "\\\\begin"             << "\\\\end"        << "\\\\usepackage" <<"\\\\document"
@@ -23,15 +20,4 @@ void Highlighter::setLaTeX() {
     CommentStartExpressionString = "\\";
     FunctionsString = "\\b[A-Za-z0-9_]+ (?=\\ ()";
     SingleLineComment = "\%[^\n]*";
-
-    // Other stuff
-    OtherPatterns << "\\\\alpha"      << "\\\\beta"     << "\\\\gamma"    << "\\\\delta"    << "\\\\epsilon" << "\\\\zeta" << "\\\\eta"
-                  << "\\\\theta"      << "\\\\iota"     << "\\\\kappa"    << "\\\\lambda"   << "\\\\mu"      << "\\\\xi"   << "\\\\nu"
-                  << "\\\\rho"        << "\\\\sigma"    << "\\\\tau"      << "\\\\upsilon"  << "\\\\phi"     << "\\\\chi"  <<"\\\\pi"
-                  << "\\\\psi"        << "\\\\omega"    << "\\\\varGamma" << "\\\\varSigma" << "\\\\varTheta"
-                  << "\\\\varLambda"  << "\\\\varkappa" << "\\\\varpi"    << "\\\\varsigma"
-                  << "\\\\varepsilon" << "\\\\varOmega" << "\\\\emptyset" << "\\\\square"   << NumbersString;
-
-    // I really don't know why I created this variable...
-    ValuePatterns << "\\";
 }

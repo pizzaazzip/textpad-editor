@@ -30,7 +30,6 @@ public:
     QPalette    Palette;
     QRect       Geometry;
     QString     DocumentTitle;
-    QTextCursor Cursor;
 
 public slots:
     /// MainWindow.cc

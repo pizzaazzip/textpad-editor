@@ -4,6 +4,7 @@
 #include "Code/MainWindow/MainWindow.hh"
 
 void MainWindow::ApplySettings() {
+
     if (TextEdit->Filename.isEmpty()) {
         TextEdit->documentNumber = DocumentNumber;
         TextEdit->setDocumentTitle(Shared::Untitled + QString::number(DocumentNumber));
@@ -11,7 +12,6 @@ void MainWindow::ApplySettings() {
 
     // Create some backups of some values (these values are erased while the settings are updated)
     DocumentTitle  = TextEdit->documentTitle();
-    Cursor         = TextEdit->textCursor();
     DocumentEdited = TextEdit->document()->isModified();
 
     Shared::ReadSettings();
@@ -30,7 +30,6 @@ void MainWindow::ApplySettings() {
     TextEdit->setFont(Shared::Font);
     TextEdit->setDocumentTitle(DocumentTitle);
     TextEdit->document()->setModified(DocumentEdited);
-    TextEdit->setTextCursor(Cursor);
 
     // Update the window title
     UpdateWindowTitle();
@@ -124,6 +123,8 @@ void MainWindow::SetLanguage() {
     Language.replace("-menu", "");
 
     Shared::Language = Language;
+
+    QMessageBox::information(this, " ", Shared::RestartApp);
 }
 
 void MainWindow::SetLineCount() {
@@ -248,7 +249,6 @@ void MainWindow::UpdateColorschemes() {
     TextEdit->setPalette(Palette);
 
     SyntaxHighlighter->setColor();
-    SyntaxHighlighter->setLanguage(SyntaxHighlighter->SelectedLanguage);
 
     switch(Shared::Selected_Colorscheme) {
     case 1: Widgets->DefaultColorscheme->setChecked   (true); break;
@@ -258,4 +258,6 @@ void MainWindow::UpdateColorschemes() {
     case 5: Widgets->OblivionColorscheme->setChecked  (true); break;
     case 6: Widgets->TangoColorscheme->setChecked     (true); break;
     }
+
+    TextEdit->UpdateLineNumberAreaWidth(TextEdit->document()->blockCount());
 }

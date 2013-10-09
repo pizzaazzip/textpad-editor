@@ -4,42 +4,34 @@
 #include "Code/TextEdit/CodeEditor/Highlighter.hh"
 
 void Highlighter::setPython() {
-    // Booleans
-    BoolPatterns    << "\\btrue\\b"    << "\\bfalse\\b";
-
     // Keywords
-    KeywordPatterns << "\\band\\b"     << "\\bdel\\b"    << "\\bfrom\\b"
-                    << "\\bnot\\b"     << "\\bwhile\\b"  << "\\bas\\b"
-                    << "\\belif\\b"    << "\\bglobal\\b" << "\\bor\\b"
-                    << "\\bwith\\b"    << "\\bassert\\b" << "\\belse\\b"
-                    << "\\bif\\b"      << "\\bpass\\b"   << "\\byield\\b"
-                    << "\\bbreak\\b"   << "\\bexcept\\b" << "\\bimport\\b"
-                    << "\\bprint\\b"   << "\\bclass\\b"  << "\\bexec\\b"
-                    << "\\bin\\b"      << "\\braise\\b"  << "\\bcontinue\\b"
-                    << "\\bfinally\\b" << "\\bis\\b"     << "\\rbeturn\\b"
-                    << "\\bdef\\b"     << "\\bfor\\b"    << "\\blambda\\b"
-                    << "\\btry\\b"     << "\\bself\\b";
+    {
+        KeywordPatterns.clear();
+
+        // Load the file that contains all the keywords of this language
+        QFile File(":/Syntax/Code/TextEdit/CodeEditor/Syntax/Keywords/Python");
+        File.open(QIODevice::ReadOnly);
+        QTextStream TextStream(&File);
+
+        // Read each line of the file and append it to the KeywordPatterns list
+        while (!TextStream.atEnd()) {
+            QString Line = "\\b";
+            Line.append(TextStream.readLine());
+            Line.append("\\b");
+            KeywordPatterns.append(Line);
+        }
+
+        File.close();
+    }
+
 
     // There are no multiline comments in Python
     CommentEndExpressionString = "\\";
     CommentStartExpressionString = "\\";
 
     // Functions
-    FunctionsString = "\\b[A-Za-z0-9_]+ (?=\\ ()";
+    FunctionsString = "\\b[A-Za-z0-9_]+ (?=\\ ()\\b";
 
     // Comments
     SingleLineComment = "#[^\n]*";
-
-    // Numbers
-    OtherPatterns << NumbersString;
-
-    // This variable should be deleted by 0.9
-    ValuePatterns << "\\";
-
-    // Remind me that I should work on supporting this language
-    QMessageBox Message;
-    Message.setText("<b>This language is not fully supported!</b>");
-    Message.setInformativeText("Many keywords and features of this language may not appear correctly highlighted.");
-    Message.setIcon(QMessageBox::Warning);
-    Message.exec();
 }

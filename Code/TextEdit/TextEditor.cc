@@ -2,6 +2,7 @@
 // See the "Authors.md" file that comes with this distribution
 
 #include "Code/TextEdit/TextEditor.hh"
+#include "QInputDialog"
 
 TextEditor::TextEditor(QWidget *parent): QPlainTextEdit(parent) {
     setMinimumSize(400, 200);
@@ -56,6 +57,7 @@ bool TextEditor::MaybeSave() {
                 MessageBox.setWindowTitle(" ");
                 MessageBox.setIconPixmap(QPixmap(":/Icons/Resources/Icons/48x48/TextpadEditor.png"));
                 MessageBox.setStandardButtons(QMessageBox::Discard | QMessageBox::Cancel | QMessageBox::Save);
+                MessageBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
                 Return = MessageBox.exec();
 
                 if (Return == QMessageBox::Cancel)
@@ -304,6 +306,7 @@ void TextEditor::OpenFile(const QString FileLocation) {
             return;
         }
     }
+    qApp->restoreOverrideCursor();
 }
 
 void TextEditor::Print() {

@@ -46,6 +46,7 @@ void MainWindow::AboutTextpad() {
     MessageBox.setWindowTitle(" ");
     MessageBox.setIconPixmap(QPixmap(":/Icons/Resources/Icons/96x96/TextpadEditor.png"));
     MessageBox.setStandardButtons(QMessageBox::Ok);
+    MessageBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     MessageBox.exec();
 }
 
@@ -65,16 +66,20 @@ void MainWindow::CreateNewWindow(MainWindow *Window) {
     if (Window->TextEdit->Filename.isEmpty())
         ++Shared::Document_Number;
 
-    if (width() < (qApp->desktop()->width() / 8) * 6)
+    if (width()< (qApp->desktop()->width() / 8) * 6)
         Window->resize(width(), height());
     else
         Window->resize(800, 400);
 
     int Space = (50 * (Shared::Window_Number + 1) / ((Shared::Window_Number * 2) + 1));
-    Window->move(x() + Space, y() + Space);
+    Window->move(Shared::x + Space, Shared::y + Space);
 
     Window->show();
+
     ++Shared::Window_Number;
+
+    Shared::x = Window->x();
+    Shared::y= Window->y();
 
     qApp->setOverrideCursor(Qt::ArrowCursor);
 }
@@ -298,5 +303,6 @@ void MainWindow::ViewHelp()
     MessageBox.setWindowTitle(" ");
     MessageBox.setIconPixmap(QPixmap(":/Icons/Resources/Icons/48x48/TextpadEditor.png"));
     MessageBox.setStandardButtons(QMessageBox::Ok);
+    MessageBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     MessageBox.exec();
 }

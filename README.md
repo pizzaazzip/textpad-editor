@@ -1,7 +1,7 @@
 Textpad Editor
 ==============
 
-Simple and lightweight text editor 
+*Simple and lightweight text editor* 
 
 ---
 
@@ -168,3 +168,9 @@ You can post your suggestions and/or ideas at [http://sourceforge.net/p/textpad-
 + Minor tweaks to OS platform files (Linux, Mac and Windows).
 + You can now drag files to the Textpad window to open them.
 + Changed the way that Textpad calculated the numbers of words to a more efficient one.
+
+**0.8.1**
+
++ Fixed a bug where the quotation marks without nothing inside ("") would not be highlighted.
++ Fixed an issue where the application would not launch on Mac OS X.
++ Minor bug fixes.

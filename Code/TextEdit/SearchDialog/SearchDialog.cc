@@ -9,10 +9,13 @@ FindDialog::FindDialog(QWidget *parent): QDialog(parent) {
 }
 
 void FindDialog::CreateWidgets() {
-    // Remove the window icon in Mac OS X
-    QIcon BlankIcon;
-    if (Shared::CheckOS() == "Mac")
+    // Make the window look like a QDialog (and remove the window icon)
+    if (Shared::CheckOS() != "Windows") {
+        QIcon BlankIcon;
         setWindowIcon(BlankIcon);
+    }
+
+    setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
 
     // Create the widgets
     Layout             = new QGridLayout(this);
@@ -120,7 +123,7 @@ void FindDialog::SearchText()
 
         setWindowTitle(Shared::SearchAndReplace.arg(0));
     }
-   qApp->setOverrideCursor(Qt::ArrowCursor);
+    qApp->setOverrideCursor(Qt::ArrowCursor);
 }
 
 void FindDialog::ReplaceAll() {
@@ -145,7 +148,7 @@ void FindDialog::ReplaceAll() {
     }
 
     SearchText();
-   qApp->setOverrideCursor(Qt::ArrowCursor);
+    qApp->setOverrideCursor(Qt::ArrowCursor);
 }
 
 void FindDialog::ReplaceFirstOccurence()

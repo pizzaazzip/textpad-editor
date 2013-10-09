@@ -19,7 +19,10 @@ int TextEditor::LineNumberAreaWidth() {
 
 void TextEditor::LineNumberAreaPaintEvent(QPaintEvent *event) {
     QPainter painter(LineCountArea);
+
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
     painter.fillRect(event->rect(), Shared::LineCountBackgroundColor);
+    painter.setBackground(Shared::LineCountBackgroundColor);
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();

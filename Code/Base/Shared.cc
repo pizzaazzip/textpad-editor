@@ -34,6 +34,9 @@ QColor Shared::SelectedTextForeground   ;
 QColor Shared::LineCountBackgroundColor ;
 QColor Shared::LineCountForegroundColor ;
 
+int Shared::x;
+int Shared::y;
+
 QString Shared::CheckOS()
 {
     // Get the current operating system

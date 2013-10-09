@@ -156,7 +156,7 @@
         <translation type="unfinished">Personalizado</translation>
     </message>
     <message>
-        <source>Colorschemes</source>
+        <source>Color schemes</source>
         <translation type="unfinished">Paletas de color</translation>
     </message>
     <message>

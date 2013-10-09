@@ -5,9 +5,6 @@
 #include "Code/TextEdit/CodeEditor/Highlighter.hh"
 
 Highlighter::Highlighter(QTextDocument *parent): QSyntaxHighlighter(parent) {
-    NumbersString = "[0-9][0-9]*";
-    QuotesString = "\".*\"|\'.*\'";
-
     setColor();
     setLanguage(1);
 }
@@ -15,18 +12,23 @@ Highlighter::Highlighter(QTextDocument *parent): QSyntaxHighlighter(parent) {
 void Highlighter::highlightBlock(const QString &text) {
     if (SelectedLanguage != 1) {
         foreach (const HighlightingRule &rule, highlightingRules) {
-            QRegExp expression(rule.pattern);
-            int index = expression.indexIn(text);
+            QRegExp expression (rule.pattern);
+            int index = 0;
+            index = text.indexOf(expression);
             while (index >= 0) {
                 int length = expression.matchedLength();
                 setFormat(index, length, rule.format);
-                index = expression.indexIn(text, index + length);
+                index = text.indexOf(expression, index + length);
             }
         }
 
+        // Handle the comments
         setCurrentBlockState(0);
-
         int startIndex = 0;
+
+        if (commentStartExpression.isEmpty() || commentEndExpression.isEmpty())
+            return;
+
         if (previousBlockState() != 1)
             startIndex = commentStartExpression.indexIn(text);
 
@@ -57,24 +59,19 @@ void Highlighter::setColor() {
     // Functions
     functionsFormat.setForeground(Shared::Functions);
 
-    // Booleans and [default]
-    otherFormat.setForeground(Shared::OtherColor);
+    // Numbers [0-9]
+    numbersFormat.setForeground(Shared::Numbers);
 
-    // Numbers [0-9] and preprocessors
-    preprocessorFormat.setForeground(Shared::Numbers);
-
-    // Quotes [""]
+    // Quotations [""]
     quotationFormat.setForeground(Shared::Quotations);
 
     // Single line comments
     singleLineCommentFormat.setForeground(Shared::Comments);
 
-    // Variables, such as [int, float, double]
-    valueFormat.setForeground(Shared::Quotations);
-
-    valueFormat.setFontWeight(QFont::Bold);
-    otherFormat.setFontWeight(QFont::Bold);
+    functionsFormat.setFontItalic(true);
     keywordFormat.setFontWeight(QFont::Bold);
+
+    setLanguage(SelectedLanguage);
 }
 
 void Highlighter::setLanguage(int languageId) {
@@ -105,34 +102,33 @@ void Highlighter::setLanguage(int languageId) {
             highlightingRules.append(rule);
         }
 
-        // Boolean format
-        foreach (const QString &pattern, BoolPatterns) {
-            rule.pattern = QRegExp(pattern);
-            rule.format = otherFormat;
-            highlightingRules.append(rule);
-        }
-
-        // Class format
-        foreach (const QString &pattern, ValuePatterns) {
-            rule.pattern = QRegExp(pattern);
-            rule.format = valueFormat;
-            highlightingRules.append(rule);
-        }
-
-        // Prepocessor format
-        foreach (const QString &pattern, OtherPatterns) {
-            rule.pattern = QRegExp(pattern);
-            rule.format = preprocessorFormat;
-            highlightingRules.append(rule);
-        }
+        // Number format
+        rule.pattern = QRegExp("[0-9][0-9]*");
+        rule.format = numbersFormat;
+        highlightingRules.append(rule);
 
         // Functions Format
         rule.pattern = QRegExp(FunctionsString);
         rule.format = functionsFormat;
         highlightingRules.append(rule);
 
-        // Quotes format
-        rule.pattern = QRegExp(QuotesString);
+        // The fucking quotations
+        rule.pattern = QRegExp("\"[^\"]+\"");
+        rule.format = quotationFormat;
+        highlightingRules.append(rule);
+
+        // Blank qoutations
+        rule.pattern = QRegExp("\"\"");
+        rule.format = quotationFormat;
+        highlightingRules.append(rule);
+
+        // Chars
+        rule.pattern = QRegExp("'[^\']+'");
+        rule.format = quotationFormat;
+        highlightingRules.append(rule);
+
+        // Blank chars
+        rule.pattern = QRegExp("''");
         rule.format = quotationFormat;
         highlightingRules.append(rule);
 
@@ -157,24 +153,45 @@ void TextEditor::HighlightByExtension() {
     short FileType;
 
     if  (!FileSuffix.isEmpty()) {
+        // Text files
         if      (FileSuffix == "txt"  ) FileType = 1;
+
+        // Bash script
         else if (FileSuffix == "sh"   ) FileType = 2;
+
+        // C/C#/C++/Objective-C files
+        else if  ((FileSuffix == "cc" )  | (FileSuffix == "c")    | (FileSuffix == "cpp") |
+                  (FileSuffix == "cxx")  | (FileSuffix == "h")    | (FileSuffix == "hh")  |
+                  (FileSuffix == "hxx")  | (FileSuffix == "m")    | (FileSuffix == "mm")  |
+                  (FileSuffix == "xib")  | (FileSuffix == "cs")   | (FileSuffix == "h++") |
+                  (FileSuffix == "c++"))  FileType = 3;
+
+        // CSS files
         else if (FileSuffix == "css"  ) FileType = 4;
-        else if (FileSuffix == "java" ) FileType = 6;
+
+        // HTML files
+        else if  ((FileSuffix == "htm")  | (FileSuffix == "html") |
+                  (FileSuffix == "xml"))  FileType = 5;
+
+        // Java files
+        else if  ((FileSuffix == "java") | (FileSuffix == "class") |
+                  (FileSuffix == "jar"))  FileType = 6;
+
+        // Python files
+        else if  ((FileSuffix == "py")   | (FileSuffix == "pyw") | (FileSuffix == "pyc")  |
+                  (FileSuffix == "pyo")  | (FileSuffix == "pyd") )  FileType = 7;
+
+        // LaTeX files
         else if (FileSuffix == "tex"  ) FileType = 8;
+
+        // Vala files
         else if (FileSuffix == "vala" ) FileType = 9;
-        else if (FileSuffix == "vb"   ) FileType = 10;
 
-        else if  ((FileSuffix == "cc" ) | (FileSuffix == "c")    | (FileSuffix == "cpp") |
-                 (FileSuffix == "cxx")  | (FileSuffix == "h")    | (FileSuffix == "hh")  |
-                 (FileSuffix == "hxx")  | (FileSuffix == "m")    | (FileSuffix == "mm")  |
-                 (FileSuffix == "xib")  | (FileSuffix == "cs")   | (FileSuffix == "h++") |
-                 (FileSuffix == "c++"))  FileType = 3;
-        else if  ((FileSuffix == "htm") | (FileSuffix == "html") |
-                 (FileSuffix == "xml"))  FileType = 5;
+        // Visual basic files
+        else if  ((FileSuffix == "vb")   | (FileSuffix == "vbe") | (FileSuffix == "vbs")  |
+                  (FileSuffix == "bas"))  FileType = 10;
 
-        else if  ((FileSuffix == "py")  | (FileSuffix == "pyw") | (FileSuffix == "pyc")  |
-                 (FileSuffix == "pyo")  | (FileSuffix == "pyd") )  FileType = 7;
+        // Other files
         else FileType = 1;
     }
 

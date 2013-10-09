@@ -1,9 +1,12 @@
 #ifndef HIGHLIGHTER_HH
 #define HIGHLIGHTER_HH
 
+#include <QFile>
+#include <QFileDialog>
+#include <QStringList>
+#include <QTextStream>
 #include <QTextCharFormat>
 #include <QSyntaxHighlighter>
-#include <QMessageBox>
 
 using namespace std;
 
@@ -36,30 +39,25 @@ private:
 
     QRegExp commentStartExpression;
     QRegExp commentEndExpression;
+    QRegExp ValueStartExpression;
+    QRegExp ValueEndExpression;
 
     QTextCharFormat keywordFormat;
-    QTextCharFormat valueFormat;
     QTextCharFormat functionsFormat;
     QTextCharFormat singleLineCommentFormat;
     QTextCharFormat multiLineCommentFormat;
     QTextCharFormat quotationFormat;
-    QTextCharFormat preprocessorFormat;
-    QTextCharFormat otherFormat;
+    QTextCharFormat numbersFormat;
 
     HighlightingRule rule;
 
-    QString QuotesString;
     QString SingleLineComment;
     QString CommentEndExpressionString;
     QString CommentStartExpressionString;
     QString FunctionsString;
 
     QStringList KeywordPatterns;
-    QStringList OtherPatterns;
-    QStringList BoolPatterns;
-    QStringList ValuePatterns;
 
-    QString NumbersString;
 
 private slots:
     void setBash();

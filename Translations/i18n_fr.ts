@@ -156,7 +156,7 @@
         <translation>Translation here</translation>
     </message>
     <message>
-        <source>Colorschemes</source>
+        <source>Color schemes</source>
         <translation>Translation here</translation>
     </message>
     <message>

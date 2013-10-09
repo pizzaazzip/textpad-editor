@@ -1,12 +1,12 @@
 // Copyright (C) 2013  Alex S. <alex_sr97@outlook.com>
 // See the "Authors.md" file that comes with this distribution
 
-#include "Code/Base/Application.hh"
+#include "Code/Base/Application.hh" 
 
 Application::Application (int & argc, char **argv) : QApplication(argc, argv) {
     // Setup the name, version and icon of the application
     setApplicationName("Textpad Editor");
-    setApplicationVersion("0.8");
+    setApplicationVersion("0.8.1");
     setWindowIcon(QIcon(":/Icons/Resources/Icons/48x48/TextpadEditor.png"));
 
     // Prepare a string that will be used to determine the arguments that where passed to the program

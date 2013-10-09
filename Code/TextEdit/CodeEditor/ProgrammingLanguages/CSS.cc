@@ -4,30 +4,31 @@
 #include "Code/TextEdit/CodeEditor/Highlighter.hh"
 
 void Highlighter::setCSS() {
-    // There are no booleans in CSS?
-    BoolPatterns << "\\";
+    // Keywords
+    {
+        KeywordPatterns.clear();
+
+        // Load the file that contains all the keywords of this language
+        QFile File(":/Syntax/Code/TextEdit/CodeEditor/Syntax/Keywords/CSS");
+        File.open(QIODevice::ReadOnly);
+        QTextStream TextStream(&File);
+
+        // Read each line of the file and append it to the KeywordPatterns list
+        while (!TextStream.atEnd()) {
+            QString Line = "\\b";
+            Line.append(TextStream.readLine());
+            Line.append("\\b");
+            KeywordPatterns.append(Line);
+        }
+
+        File.close();
+    }
 
     // Comments
     CommentEndExpressionString = "\\*/";
     CommentStartExpressionString = "/\\*";
     SingleLineComment = "\\";
 
-    // There are no functions in CSS?
+    // There are no functions in CSS
     FunctionsString = "\\";
-
-    // Numbers
-    OtherPatterns << NumbersString;
-
-    // Keywords
-    KeywordPatterns << " ([^<]*):" << "a: ([^<]*)";
-
-    // This variable has no use...
-    ValuePatterns << "\\";
-
-    // Remind me that I should work on supporting this language
-    QMessageBox Message;
-    Message.setText("<b>This language is not fully supported!</b>");
-    Message.setInformativeText("Many keywords and features of this language may not appear correctly highlighted.");
-    Message.setIcon(QMessageBox::Warning);
-    Message.exec();
 }

@@ -2,8 +2,10 @@ greaterThan(QT_MAJOR_VERSION, 4):
 
 TEMPLATE   = app
 TARGET     = textpad-editor
-VERSION    = 0.8
-CODECFORTR = UTF-8
+VERSION    = 0.8.1
+
+CODECFORTR  = UTF-8
+CODECFORSRC = UTF-8
 
 QT += widgets
 

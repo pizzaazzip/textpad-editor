@@ -110,6 +110,7 @@ QString Shared::Error;
 QString Shared::CannotWriteFile;
 QString Shared::CannotReadFile;
 QString Shared::HelpText;
+QString Shared::RestartApp;
 
 // Search and Replace dialog strings
 QString Shared::Search;
@@ -175,12 +176,17 @@ void Shared::TranslateStrings()
 
     // Languages menu
     LanguageMenu = QObject::tr("Languages");
-    English      = "English";
-    French       = "Français (French)";
-    German       = "Deutsch (German)";
-    Romanian     = "Română (Romanian)";
-    Russian      = "Русский (Russian)";
-    Spanish      = "Español (Spanish)";
+    //French       = "Français (French)";
+    //German       = "Deutsch (German)";
+    //Romanian     = "Română (Romanian)";
+    //Russian      = "Русский (Russian)";
+    //Spanish      = "Español (Spanish)";
+    English  = "English";
+    French   = "French";
+    German   = "German";
+    Romanian = "Romanian";
+    Russian  = "Russian";
+    Spanish  = "Spanish";
 
     // Modes menu
     Modes       = QObject::tr("Modes");
@@ -189,7 +195,7 @@ void Shared::TranslateStrings()
     CustomMode  = QObject::tr("Custom mode");
 
     // Color schemes menu
-    ColorSchemes         = QObject::tr("Colorschemes");
+    ColorSchemes         = QObject::tr("Color schemes");
     DefaultColorscheme   = QObject::tr("Default");
     CobaltColorscheme    = "Cobalt";
     GrayscaleColorscheme = "Grayscale";
@@ -232,6 +238,7 @@ void Shared::TranslateStrings()
     Error                 = QObject::tr("Error");
     CannotWriteFile       = QObject::tr("Cannot write file") + " %1:\n%2";
     CannotReadFile        = QObject::tr("Cannot read file")  + " %1:\n%2";
+    RestartApp            = QObject::tr("The language change will take effect after a restart of Textpad.");
     HelpText              = QObject::tr("<p><h2>To use Textpad, you need to be able to:</h2></p><hr>"
                                         "<ul>"
                                         "<li>Use a mouse and/or trackpad.</li>"
@@ -248,7 +255,6 @@ void Shared::TranslateStrings()
                                         "<p>If you are willing to write a manual with all the features of Textpad, "
                                         "please do it and <a href = 'mailto:alex_sr97@outlook.com'>send it to my email</a> "
                                         "(please provide your name or nickname so that I can give credit for your work).</p>");
-
     // Search dialog strings
     Search           = QObject::tr("Search");
     Replace          = QObject::tr("Replace");

@@ -24,4 +24,14 @@
     <qresource prefix="/HTML">
         <file>Resources/HTML/en.html</file>
     </qresource>
+    <qresource prefix="/Syntax">
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/C</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/CSS</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/HTML</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/Java</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/Python</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/Vala</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Keywords/VB</file>
+        <file>Code/TextEdit/CodeEditor/Syntax/Quotations</file>
+    </qresource>
 </RCC>

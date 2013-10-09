@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include <QUrl>
+#include <QFile>
 #include <QDebug>
 #include <QLabel>
 #include <QStyle>
@@ -83,6 +84,9 @@ public:
     static void TranslateStrings();
     static void ReadSettings();
     static void WriteSettings(QMainWindow *Window);
+
+    static int x;
+    static int y;
 
     /// Strings used in the application
 
@@ -191,6 +195,7 @@ public:
     static QString CannotWriteFile;
     static QString CannotReadFile;
     static QString HelpText;
+    static QString RestartApp;
 
     /// Strings used in the search dialog
     static QString Search;
